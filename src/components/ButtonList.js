@@ -1,31 +1,49 @@
 import React from 'react'
 import Button from './Button'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {GOOGLE_API_KEY, SEARCH_RESULTS_API} from '../utils/constants'
+import { getSearchSuggestionData } from "../utils/searchSlice";
 
 const ButtonList = () => {
-  const list=["All","Gaming","Sports","Live","News","Cooking","T-Series","Auditons","Indian classical music",
-"Computer programming","Shopping","Recemtly uploaded","Watched","New to you"];
-// console.log(list)
+
+
+const navigate = useNavigate();
+const dispatch = useDispatch();
+
+const getSearchSuggestionsResults = async (category) => {
+  navigate(`/results?search_query=${category}`);
+  const data = await fetch(
+    `${SEARCH_RESULTS_API}q=${category}`
+  );
+  const result = await data.json();
+  console.log(result);
+  dispatch(getSearchSuggestionData(result?.items));
+};
   return (
     <div className='flex'>
-      {/* <Button name="All"/> */}
-
-      {/* {list?.map((item,index)=>{
-        <Button  key={index} name={item}/>
-      })} */}
-       <Button name="All" />
-      <Button name="Gaming" />
-      <Button name="Songs" />
-      <Button name="Live" />
-      <Button name="Soccer" />
-      <Button name="Cricket" />
-      <Button name="Cooking" />
-      <Button name="Cricket" />
-      <Button name="Valentines" />
-      <Button name="Cricket" />
-      <Button name="Cooking" />
-      <Button name="Cricket" />
+       {buttonList.map((list, i) => (
+          <Button
+            key={i}
+            name={list.name}
+            getCategory={getSearchSuggestionsResults}
+          />
+        ))}
+      
+      
     </div>
   )
 }
 
 export default ButtonList
+export const buttonList = [
+  {
+    name: "All",
+  },
+  { name: "Mixes" },
+  { name: "Comedy" },
+  { name: "News" },
+  { name: "Gadgets" },
+  { name: "Fitness" },
+  { name: "Bollywood Songs" },
+];
