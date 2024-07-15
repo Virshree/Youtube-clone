@@ -39,9 +39,9 @@ const WatchPage = () => {
     dispatch(closeMenu());
   }, []);
   return (
-    <div className="flex flex-col w-[1220px]">
+    <div className="flex flex-col w-[1150px]">
       <div className="flex">
-        <div className="py-5 px-3">
+        <div className="py-5 px-3 mx-5  ml-16 mt-16">
           <iframe
             width="1200"
             height="700"
@@ -73,11 +73,13 @@ const WatchPage = () => {
           </p>
         </div>
       
-        <div className="">
+        <div className="mt-16 mx-5">
+          <h2 className="font-bold text-xl">Live Chat</h2>
           <LiveChat />
         </div>
       </div>
-      <div>
+      <div className="mx-12 ml-20 mt-14">
+
         <CommentsContainer />
       </div>
     </div>

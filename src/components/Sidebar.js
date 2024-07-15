@@ -8,11 +8,11 @@ const Sidebar = () => {
   if(!isMenuOpen) return null;
   
   return (
-    <div className='p-5 shadow-lg w-48'>
+    <div className='p-5 shadow-lg w-48 cursor-pointer'>
       
       <ul>
 
-         <Link to="/"><li>Home</li></Link> 
+         <Link to="/" className='cursor-pointer'><li>Home</li></Link> 
           <li>Shorts</li>
           <li>Video</li>
           <li>Live</li>
