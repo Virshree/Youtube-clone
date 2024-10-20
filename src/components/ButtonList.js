@@ -4,28 +4,30 @@ import Button from './Button'
 import { useDispatch } from 'react-redux';
 import {GOOGLE_API_KEY, SEARCH_RESULTS_API} from '../utils/constants'
 import { getSearchSuggestionData } from "../utils/searchSlice";
+import { useNavigate } from 'react-router-dom';
 
 const ButtonList = () => {
 
 
 const dispatch = useDispatch();
+const navigate=useNavigate();
 
-// const getSearchSuggestionsResults = async (category) => {
-//   // navigate(`/results?search_query=${category}`);
-//   const data = await fetch(
-//     `${SEARCH_RESULTS_API}q=${category}`
-//   );
-//   const result = await data.json();
-//   console.log(result);
-//   dispatch(getSearchSuggestionData(result?.items));
-// };
+const getSearchSuggestionsResults = async (category) => {
+ navigate(`/results?search_query=${category}`);
+  const data = await fetch(
+    `${SEARCH_RESULTS_API}q=${category}`
+  );
+  const result = await data.json();
+  console.log(result);
+  dispatch(getSearchSuggestionData(result?.items));
+};
   return (
     <div className='flex'>
        {buttonList.map((list, i) => (
           <Button
             key={i}
             name={list.name}
-           // getCategory={getSearchSuggestionsResults}
+           getCategory={getSearchSuggestionsResults}
           />
         ))}
       
